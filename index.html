@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="icon"
+      href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKwn479oCge5YyA93dzJKH19THFVfgYN3R1A&usqp=CAU">
+    <title>Neb Examination </title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css" rel="stylesheet" />
+    <script src="app/router.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="./styles/index.scss">
+    <link rel="stylesheet" href="./styles/main.scss">
+  </head>
+
+  <body oncopy="disableCopy()">
+    <div id="root">
+      <nav id="main-nav" class="sidebar">
+        <a href="/">
+          <img src="./assets/logo/premierlogo.jpg" alt="" class="logo">
+        </a>
+        <div class="btns">
+          <a href="/" onclick="route()">Home</a>
+          <a href="/about" onclick="route()">About</a>
+          <a href="/ask" onclick="route()">Ask</a>
+          <a href="/exam" onclick="route()">Exams</a>
+          <a href="/questions" onclick="route()">Questions</a>
+        </div>
+      </nav>
+      <div id="main-page">
+        <div class="coundown">
+          <h1>Class 12 examination Preparation</h1>
+          <div class="container">
+            <div class="date">
+              <p class="date" id="day">00</p>
+              <span>Day</span>
+            </div>
+            <div class="date">
+              <p class="hours" id="hours">00</p>
+              <span>Hours</span>
+            </div>
+            <div class="date">
+              <p class="minute" id="minute">00</p>
+              <span>Minute</span>
+            </div>
+            <div class="date">
+              <p class="second" id="second">00</p>
+              <span>Seconds</span>
+            </div>
+          </div>
+
+        </div>
+        <div class="motivation">
+          <p>
+            Consistency is the key to success.
+          </p>
+          <h2>- neeswebservices</h2>
+        </div>
+      </div>
+
+
+      <script src="../libs/index.js"></script>
+      <script src="../libs/question.js"></script>
+    </div>
+
+
+    <script src="main.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("body").bind('cut copy paste', function (e) {
+          alert('dont copy');
+          e.preventDefault();
+          return false;
+        });
+        $('body').on("contextmenu", function (e) {
+          return false;
+        });
+        $('img').attr('draggable', false);
+
+        const settings = {
+          "async": true,
+          "crossDomain": true,
+          "url": "https://type.fit/api/quotes",
+          "method": "GET"
+        };
+        setInterval(function () {
+          $.ajax(settings).done(function (response) {
+            const data = JSON.parse(response);
+            const quote = data[Math.floor(Math.random() * data.length)];
+            $('.motivation p').text(`"${quote.text}"`);
+            if (quote.author == null) {
+              $('.motivation h2').text(`-nees webservices`);
+            } else {
+              $('.motivation h2').text(`- ${quote.author}`);
+            }
+          });
+        }, 60000);
+
+      })
+
+    </script>
+  </body>
+
+</html>
